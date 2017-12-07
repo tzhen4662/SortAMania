@@ -38,8 +38,13 @@ public class Team16SortCompetition extends SortCompetition{
 
 	@Override
 	public int challengeFour(int[][] arr) {
-		// TODO Auto-generated method stub
-		return 0;
+		int[] medianArr = new int[arr.length];
+		for (int i = 0; i < arr.length; i++)
+		{
+			selectionSort(arr[i]);
+			medianArr[i] = Median(arr[i]);
+		}
+		return Median(medianArr);
 	}
 
 	@Override
@@ -117,6 +122,21 @@ public class Team16SortCompetition extends SortCompetition{
 		for(int i = 0; i<name.length;i++)
 		{
 			name[i] = x;
+		}
+		return name;
+	}
+	
+	public static int[][] generateMDIntArr()
+	{
+		int[][] name = new int[1000][1000];
+		Random rand = new Random();
+		int x = rand.nextInt(10000) + 1;
+		for(int i = 0; i<name.length;i++)
+		{
+			for(int j = 0; j<name[i].length; j++)
+			{
+				name[i][j] = x;
+			}
 		}
 		return name;
 	}
