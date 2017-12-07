@@ -2,6 +2,11 @@ import java.util.Random;
 
 public class Team16SortCompetition extends SortCompetition{
 
+	public static void main(String[] args)
+	{
+		Team16SortCompetition bot = new Team16SortCompetition();		
+	}
+	
 	@Override
 	public int challengeOne(int[] arr) {
 		selectionSort(arr);                                                
@@ -55,8 +60,7 @@ public class Team16SortCompetition extends SortCompetition{
 
 	@Override
 	public String greeting() {
-		// TODO Auto-generated method stub
-		return null;
+		return "Omae wa mou shindeiru";
 	}
 
 	public static void selectionSort(int[] list1)
