@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 
 public class Team16SortCompetition extends SortCompetition{
@@ -54,8 +55,15 @@ public class Team16SortCompetition extends SortCompetition{
 
 	@Override
 	public int challengeFive(Comparable[] arr, Comparable query) {
-		// TODO Auto-generated method stub
-		return 0;
+		mergeSort(arr);
+		for(int i=0; i < arr.length; i++)
+		{
+			if(arr[i] == query)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	@Override
@@ -96,6 +104,71 @@ public class Team16SortCompetition extends SortCompetition{
 					list1[i] = temp;
 				}
 			}
+		}
+	}
+	
+	public static Comparable[] merge(Comparable[] list1, Comparable[] list2)
+	{
+		Comparable[] merged = new Comparable[list1.length + list2.length];
+		int z = 0;
+		int firstList = 0;
+		int secList = 0;
+		while(firstList < list1.length && secList < list2.length)
+		{
+			if (list1[firstList].compareTo(list2[secList]) == 0)
+			{
+				merged[z] = list1[firstList];
+				firstList++;
+				secList++;
+				z++;
+			}
+			else if (list1[firstList].compareTo(list2[secList]) < 0)
+			{
+				merged[z] = list1[firstList];
+				firstList++;
+				z++;
+			}
+			else if (list2[secList].compareTo(list1[firstList]) < 0)
+			{
+				merged[z] = list2[secList];
+				secList++;
+				z++; 
+			}
+		}
+		
+		if (firstList >= list1.length)
+		{
+			while (secList < list2.length)
+			{
+				merged[z] = list2[secList];
+				z++;
+				secList++;
+			}
+		}
+		if(secList >= list2.length)
+		{
+			while (firstList < list1.length)
+			{
+				merged[z] = list1[firstList];
+				z++;
+				firstList++;
+			}
+		}
+		return merged;
+	}
+	
+	public static Comparable[] mergeSort(Comparable[] list)
+	{
+		if (list.length == 1)
+		{
+			return list;
+		}
+		else
+		{
+			int half = list.length/2;
+			Comparable[] firstHalf = Arrays.copyOfRange(list, 0, half);
+			Comparable[] secondHalf = Arrays.copyOfRange(list, half, list.length);
+			return merge(mergeSort(firstHalf), mergeSort(secondHalf));
 		}
 	}
 
